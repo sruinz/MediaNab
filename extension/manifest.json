@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "MediaNab",
+  "version": "1.2.4",
+  "version_name": "1.2.4.06",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "downloads",
+    "scripting",
+    "activeTab",
+    "tabs",
+    "offscreen",
+    "webRequest",
+    "notifications",
+    "unlimitedStorage",
+    "nativeMessaging"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_bridge.js"],
+      "run_at": "document_start",
+      "world": "ISOLATED"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "MediaNab"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "web_accessible_resources": [{
+    "resources": ["companion/medianab_host.py"],
+    "matches": ["<all_urls>"]
+  }]
+}
